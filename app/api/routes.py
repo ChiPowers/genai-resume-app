@@ -21,8 +21,9 @@ def embed_and_store():
 @api_blueprint.route('/handle-query', methods=['POST'])
 def handle_query():
 	# handles embedding the user's question
-	question = request.json('question')
+	question = request.json['question']
 	context_chunks = chroma_service.get_most_similar_chunks_for_query(question, rag_pdf_path)
 	prompt = build_prompt(question, context_chunks)
-	answer = openai_service.get_llm_answer(prompt)
-	return jsonify({"question": question, "answer": answer})
+	# answer = openai_service.get_llm_answer(prompt)
+	return jsonify({"question": question, "prompt": str(prompt), "context": context_chunks})
+
