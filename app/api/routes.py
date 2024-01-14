@@ -1,4 +1,5 @@
 # fullstack-resume/app/api/routes.py
+
 from . import api_blueprint
 from flask import request, jsonify
 from app.services import openai_service, chroma_service, scraping_service

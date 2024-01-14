@@ -7,9 +7,6 @@ from langchain_core.runnables import RunnablePassthrough
 
 from app.utils.helper_functions import format_docs
 
-import json
-import requests
-from openai import OpenAI
 
 OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
 OPENAI_EMBEDDING_MODEL = "gpt-3.5-turbo"
