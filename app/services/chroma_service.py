@@ -19,9 +19,9 @@ def embed_chunks_and_upload_to_chroma(chunks, db_path):
 	return
 
 
-def get_most_similar_chunks_for_query(rag_pdf_path):
+def get_most_similar_chunks_for_query(db_path):
 	# Set Up Embeddings
 	embeddings = OpenAIEmbeddings()
-	vectordb = Chroma(persist_directory=rag_pdf_path, embedding_function=embeddings)
+	vectordb = Chroma(persist_directory=db_path, embedding_function=embeddings)
 	retriever = vectordb.as_retriever(search_type="similarity", search_kwargs={"k": 6})
 	return retriever

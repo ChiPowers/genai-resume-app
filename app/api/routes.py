@@ -1,18 +1,17 @@
 # fullstack-resume/app/api/routes.py
-
+import os
 from . import api_blueprint
 from flask import request, jsonify
-from app.services import openai_service, chroma_service, scraping_service
+from app.services import openai_service, chroma_service
 from app.utils.helper_functions import split_docs, build_prompt, load_docs
 
-db_path = "/Users/chivonpowers/chroma_data/"
-rag_pdf_path = "/Users/chivonpowers/Downloads/Resume_Docs/pdfs/"
+
 
 @api_blueprint.route('/embed-and-store', methods=['POST'])
 def embed_and_store():
-	texts = load_docs(rag_pdf_path)
+	texts = load_docs(os.environ.get("rag_pdf_path"))
 	chunks = split_docs(texts)
-	chroma_service.embed_chunks_and_upload_to_chroma(chunks, db_path)
+	chroma_service.embed_chunks_and_upload_to_chroma(chunks, os.environ.get("db_path"))
 	response_json = {
 		"message": "Document chunks embedded successfully"
 	}
@@ -23,7 +22,7 @@ def embed_and_store():
 def handle_query():
 	# handles embedding the user's question
 	question = request.json['question']
-	retriever = chroma_service.get_most_similar_chunks_for_query(db_path)
+	retriever = chroma_service.get_most_similar_chunks_for_query(os.environ.get("db_path"))
 	prompt = build_prompt()
 	answer = openai_service.get_llm_answer(prompt, retriever, question)
 	return jsonify({"question:": question, "answer:": answer})
