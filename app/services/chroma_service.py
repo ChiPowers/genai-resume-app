@@ -1,6 +1,6 @@
 
 from langchain_community.vectorstores import Chroma
-from langchain_openai import OpenAIEmbeddings, ChatOpenAI
+from langchain_openai import OpenAIEmbeddings
 from langchain_community.document_loaders import PyPDFDirectoryLoader
 
 
@@ -19,7 +19,7 @@ def embed_chunks_and_upload_to_chroma(chunks, db_path):
 	return
 
 
-def get_most_similar_chunks_for_query(query, rag_pdf_path):
+def get_most_similar_chunks_for_query(rag_pdf_path):
 	# Set Up Embeddings
 	embeddings = OpenAIEmbeddings()
 	vectordb = Chroma(persist_directory=rag_pdf_path, embedding_function=embeddings)

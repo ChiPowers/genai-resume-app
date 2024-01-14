@@ -23,7 +23,7 @@ def embed_and_store():
 def handle_query():
 	# handles embedding the user's question
 	question = request.json['question']
-	retriever = chroma_service.get_most_similar_chunks_for_query(question, db_path)
+	retriever = chroma_service.get_most_similar_chunks_for_query(db_path)
 	prompt = build_prompt()
 	answer = openai_service.get_llm_answer(prompt, retriever, question)
 	return jsonify({"question:": question, "answer:": answer})

@@ -10,7 +10,7 @@ def load_docs(path_to_pdfs):
     return documents
 
 
-def split_docs(documents, chunk_size=660, chunk_overlap=20):
+def split_docs(documents, chunk_size=1000, chunk_overlap=100):
     # Split Text into Manageable Chunks
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
     texts = text_splitter.split_documents(documents)
