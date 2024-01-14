@@ -10,7 +10,7 @@ def load_docs(path_to_pdfs):
     return documents
 
 
-def split_docs(documents, chunk_size=660, chunk_overlap=90):
+def split_docs(documents, chunk_size=660, chunk_overlap=20):
     # Split Text into Manageable Chunks
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
     texts = text_splitter.split_documents(documents)
@@ -21,16 +21,17 @@ def format_docs(docs):
     return "\n\n".join(doc.page_content for doc in docs)
 
 
-def build_prompt(query, context_chunks):
+def build_prompt():
     from langchain_core.prompts import ChatPromptTemplate
-    context = format_docs(context_chunks)
-    template = f'You are a potential employer reviewing the work history \
-    and accomplishments of Dr. Chivon E. Powers. \
-    Use these documents to answer questions asked by an interviewer who is interviewing Chivon \
-    for an ai engineer role in the tech industry. Context: {context} \
+    template = """
+    You are interviewing Dr. Chivon Powers to understand her work experience\
+    and accomplishments. \
+    Use the following context to answer interview questions as Chivon would respond during \
+    an interview for an AI engineering role in the tech industry. Context: {context} \
     Interviewer Question: \
     {query} \
-    Answer:'
+    Answer:
+    """
 
     prompt = ChatPromptTemplate.from_template(template)
     return prompt

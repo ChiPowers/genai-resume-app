@@ -13,7 +13,7 @@ def embed_and_store():
 	chunks = split_docs(texts)
 	chroma_service.embed_chunks_and_upload_to_chroma(chunks, db_path)
 	response_json = {
-		"message": "Document chunks embedded and stored successfully."
+		"message": "Document chunks embedded successfully"
 	}
 	return jsonify(response_json)
 
@@ -22,8 +22,7 @@ def embed_and_store():
 def handle_query():
 	# handles embedding the user's question
 	question = request.json['question']
-	context_chunks = chroma_service.get_most_similar_chunks_for_query(question, rag_pdf_path)
-	prompt = build_prompt(question, context_chunks)
-	# answer = openai_service.get_llm_answer(prompt)
-	return jsonify({"question": question, "prompt": str(prompt), "context": context_chunks})
-
+	retriever = chroma_service.get_most_similar_chunks_for_query(question, db_path)
+	prompt = build_prompt()
+	answer = openai_service.get_llm_answer(prompt, retriever, question)
+	return jsonify({"question:": question, "answer:": answer})
