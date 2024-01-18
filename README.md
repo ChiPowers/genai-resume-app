@@ -4,10 +4,10 @@ This application uses LLM with retrieval augmented generation (RAG) to answer in
 
 LLM used is GPT3.5-Turbo from Open AI. An API key from OpenAI is required.
 
-To run this app locally, you will need an .env file that provides the following environment variables:
+To run this app locally, you will need an .env file that provides the following environment variables:<br/>
 
-OPENAI_API_KEY="your-api-key"
-rag_pdf_path = "path-to-pdf-of-resume-on-local-machine"
+OPENAI_API_KEY="your-api-key"<br/>
+rag_pdf_path = "path-to-pdf-of-resume-on-local-machine"<br/>
 db_path = "path-to-chroma-data-folder-where-embeddings-db-is-stored"
 
 
