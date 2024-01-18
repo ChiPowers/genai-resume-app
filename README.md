@@ -6,9 +6,9 @@ LLM used is GPT3.5-Turbo from Open AI. An API key from OpenAI is required.
 
 To run this app locally, you will need an .env file that provides the following environment variables:
 
-OPENAI_API_KEY="<your-api-key>"
-rag_pdf_path = "<path-to-pdf-of-resume-on-local-machine"
-db_path = "<path-to-chroma-data-folder-where-embeddings-db-is-stored>"
+OPENAI_API_KEY="your-api-key"
+rag_pdf_path = "path-to-pdf-of-resume-on-local-machine"
+db_path = "path-to-chroma-data-folder-where-embeddings-db-is-stored"
 
 
 Put any resume into the pdfs folder. 
