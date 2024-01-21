@@ -3,15 +3,14 @@ import os
 from . import api_blueprint
 from flask import request, jsonify
 from app.services import openai_service, chroma_service
-from app.utils.helper_functions import split_docs, build_prompt, load_docs
-
+from app.utils.helper_functions import split_docs, build_prompt, load_docs, session_first_embed_and_store
 
 
 @api_blueprint.route('/embed-and-store', methods=['POST'])
 def embed_and_store():
 	texts = load_docs(os.environ.get("rag_pdf_path"))
 	chunks = split_docs(texts)
-	chroma_service.embed_chunks_and_upload_to_chroma(chunks, os.environ.get("db_path"))
+	chroma_service.embed_chunks_and_upload_to_chroma(chunks)
 	response_json = {
 		"message": "Document chunks embedded successfully"
 	}
