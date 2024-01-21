@@ -6,12 +6,11 @@ from app.services import openai_service, chroma_service
 from app.utils.helper_functions import split_docs, build_prompt, load_docs, session_first_embed_and_store
 
 
-
 @api_blueprint.route('/embed-and-store', methods=['POST'])
 def embed_and_store():
 	texts = load_docs(os.environ.get("rag_pdf_path"))
 	chunks = split_docs(texts)
-	chroma_service.embed_chunks_and_upload_to_chroma(chunks, os.environ.get("db_path"))
+	chroma_service.embed_chunks_and_upload_to_chroma(chunks)
 	response_json = {
 		"message": "Document chunks embedded successfully"
 	}
@@ -20,7 +19,6 @@ def embed_and_store():
 
 @api_blueprint.route('/handle-query', methods=['POST'])
 def handle_query():
-	session_first_embed_and_store()
 	# handles embedding the user's question
 	question = request.json['question']
 	retriever = chroma_service.get_most_similar_chunks_for_query(os.environ.get("db_path"))

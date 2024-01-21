@@ -19,8 +19,8 @@ def split_docs(documents, chunk_size=1000, chunk_overlap=20):
     # Split Text into Manageable Chunks
     text_splitter = CharacterTextSplitter(
         separator="\n\n",
-        chunk_size=1000,
-        chunk_overlap=20,
+        chunk_size=chunk_size,
+        chunk_overlap=chunk_overlap,
         length_function=len,
         is_separator_regex=False)
     texts = text_splitter.split_documents(documents)
@@ -47,8 +47,9 @@ def build_prompt():
     prompt = ChatPromptTemplate.from_template(template)
     return prompt
 
-def session_first_embed_and_store(doc_path="rag_pdf_path"):
-	texts = load_docs(os.environ.get(doc_path))
+def session_first_embed_and_store(doc_path=os.environ.get("rag_pdf_path")
+                                  , db_path=os.environ.get("db_path")):
+	texts = load_docs(doc_path)
 	chunks = split_docs(texts)
-	chroma_service.embed_chunks_and_upload_to_chroma(chunks, os.environ.get("db_path"))	
-	return
+	chroma_service.embed_chunks_and_upload_to_chroma(chunks, db_path)	
+	return 
