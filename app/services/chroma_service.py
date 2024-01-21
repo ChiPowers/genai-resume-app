@@ -15,13 +15,14 @@ def embed_chunks_and_upload_to_chroma(chunks, db_path):
 	embeddings = OpenAIEmbeddings()
 
 	# Store Text in ChromaDB
-	Chroma.from_documents(chunks, embeddings, persist_directory=db_path)
+	Chroma.from_documents(chunks, embeddings)
 	return
 
 
 def get_most_similar_chunks_for_query(db_path):
 	# Set Up Embeddings
 	embeddings = OpenAIEmbeddings()
-	vectordb = Chroma(persist_directory=db_path, embedding_function=embeddings)
+	vectordb = Chroma(embedding_function=embeddings)
 	retriever = vectordb.as_retriever(search_type="similarity", search_kwargs={"k": 6})
 	return retriever
+

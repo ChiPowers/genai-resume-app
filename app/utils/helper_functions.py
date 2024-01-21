@@ -1,8 +1,13 @@
 # YourApp/utils/helper_functions.py
 
+from app.services import chroma_service
 from langchain.text_splitter import CharacterTextSplitter
 from langchain_community.document_loaders import PyPDFDirectoryLoader
+from langchain_community.vectorstores import Chroma
+from langchain_openai import OpenAIEmbeddings
+from langchain_community.document_loaders import PyPDFDirectoryLoader
 
+import os
 
 def load_docs(path_to_pdfs):
     loader = PyPDFDirectoryLoader(path_to_pdfs)
@@ -42,3 +47,8 @@ def build_prompt():
     prompt = ChatPromptTemplate.from_template(template)
     return prompt
 
+def session_first_embed_and_store(doc_path="rag_pdf_path"):
+	texts = load_docs(os.environ.get(doc_path))
+	chunks = split_docs(texts)
+	chroma_service.embed_chunks_and_upload_to_chroma(chunks, os.environ.get("db_path"))	
+	return

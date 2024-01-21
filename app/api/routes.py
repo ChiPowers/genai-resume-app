@@ -3,7 +3,7 @@ import os
 from . import api_blueprint
 from flask import request, jsonify
 from app.services import openai_service, chroma_service
-from app.utils.helper_functions import split_docs, build_prompt, load_docs
+from app.utils.helper_functions import split_docs, build_prompt, load_docs, session_first_embed_and_store
 
 
 
@@ -20,6 +20,7 @@ def embed_and_store():
 
 @api_blueprint.route('/handle-query', methods=['POST'])
 def handle_query():
+	session_first_embed_and_store()
 	# handles embedding the user's question
 	question = request.json['question']
 	retriever = chroma_service.get_most_similar_chunks_for_query(os.environ.get("db_path"))
