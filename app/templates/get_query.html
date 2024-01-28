@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h2>{{ the_title }}</h2>
+
+<form method ='POST' action='/handle-query'>
+    <table>
+        <p>Enter a question about Chivon Powers's work history.</p>
+        <input name='the_question' type='TEXT' width='60'>
+    </table>
+    <p><input value='Pose the Question' type ='SUBMIT'></p>  
+</form>
+{% endblock %}
