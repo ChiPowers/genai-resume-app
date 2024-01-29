@@ -23,7 +23,7 @@ def handle_query() -> 'html':
 	answer = openai_service.get_llm_answer(prompt, retriever, question)
 	print(answer)
 	return render_template('handle_query.html',
-						 the_title='Ask about My Work History',
+						 the_title='Interview Me',
 						 the_question=question,
 						 the_answer=answer,
 						 )

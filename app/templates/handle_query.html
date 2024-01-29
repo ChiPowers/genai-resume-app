@@ -2,9 +2,18 @@
 
 {% block body %}
 <h2>{{ the_title }}</h2>
-
+<br><br>
 
 <p>Your question:  {{ the_question }}</p>  
 <h3> Answer: {{ the_answer }}</h3>
+<br><br>
+
+<form method ='POST' action='/handle-query'>
+    <table>
+        <p>Enter a question about Chivon Powers's work history.</p>
+        <input name='the_question' type='TEXT' width='60'>
+    </table>
+    <p><input value='Pose the Question' type ='SUBMIT'></p>  
+</form>
 
 {% endblock %}
