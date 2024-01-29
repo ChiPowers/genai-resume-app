@@ -10,7 +10,7 @@ def embed_and_store():
 	texts = load_docs(os.environ.get("rag_pdf_path"))
 	chunks = split_docs(texts)
 	chroma_service.embed_chunks_and_upload_to_chroma(chunks, os.environ.get("db_path"))
-	return "Document chunks embedded successfully
+	return "Document chunks embedded successfully"
 
 
 @api_blueprint.route('/handle-query', methods=['POST'])
