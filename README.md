@@ -13,6 +13,10 @@ db_path = "path-to-chroma-data-folder-where-embeddings-db-is-stored"
 
 Put any resume into the pdfs folder. 
 
+Install requirements.txt using:
+    
+    pip install requirements.txt
+
 First use the 'embed-and-store' call to do the document retrieval and store as embeddings in the Chroma db. 
 Example: 
     
