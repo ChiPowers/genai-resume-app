@@ -1,6 +1,6 @@
 # YourApp/utils/helper_functions.py
 
-from app.services import chroma_service
+from genai_resume_app.services import chroma_service
 from langchain.text_splitter import CharacterTextSplitter
 from langchain_community.document_loaders import PyPDFDirectoryLoader
 from langchain_community.vectorstores import Chroma

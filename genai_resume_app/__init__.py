@@ -9,7 +9,7 @@ def create_app():
     if os.environ.get('FLASK_ENV') == 'development':
         CORS(app)
 
-    from app.api.routes import api_blueprint
+    from genai_resume_app.api.routes import api_blueprint
     app.register_blueprint(api_blueprint)
 
     return app

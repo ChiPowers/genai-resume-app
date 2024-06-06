@@ -5,7 +5,7 @@ from langchain_openai import ChatOpenAI
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 
-from app.utils.helper_functions import format_docs
+from genai_resume_app.utils.helper_functions import format_docs
 
 
 OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')

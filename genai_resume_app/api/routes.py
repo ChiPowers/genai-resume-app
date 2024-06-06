@@ -1,9 +1,9 @@
-# fullstack-resume/app/api/routes.py
+# fullstack-resume/genai_resume_app/api/routes.py
 import os
 from . import api_blueprint
 from flask import request, jsonify, render_template
-from app.services import openai_service, chroma_service
-from app.utils.helper_functions import split_docs, build_prompt, load_docs, session_first_embed_and_store
+from genai_resume_app.services import openai_service, chroma_service
+from genai_resume_app.utils.helper_functions import split_docs, build_prompt, load_docs, session_first_embed_and_store
 
 @api_blueprint.route('/embed-and-store', methods=['GET'])
 def embed_and_store():
